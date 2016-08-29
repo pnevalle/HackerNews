@@ -48,16 +48,19 @@ public class TopStoryDetailFragment extends Fragment implements TopStoryDetailVi
 
     @Override
     public void showErrorMessage(String message) {
-        Snackbar snackbar = Snackbar
-                .make(getView(), message, Snackbar.LENGTH_LONG)
-                .setAction("RETRY", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mTopStoryDetailPresenter.onStart();
-                    }
-                });
+        if (getView() != null) {
+            Snackbar snackbar = Snackbar
+                    .make(getView(), message, Snackbar.LENGTH_LONG)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mTopStoryDetailPresenter.onStart();
+                        }
+                    });
 
-        snackbar.show();
+            snackbar.show();
+            showProgessBar(false);
+        }
     }
 
     @Override

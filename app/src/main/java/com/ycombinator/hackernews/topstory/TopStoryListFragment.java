@@ -76,16 +76,19 @@ public class TopStoryListFragment extends Fragment implements TopStoryView {
 
     @Override
     public void showSnackBar(String message) {
-        Snackbar snackbar = Snackbar
-                .make(getView(), message, Snackbar.LENGTH_LONG)
-                .setAction("RETRY", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mTopStoryPresenter.onStart();
-                    }
-                });
+        if (getView() != null) {
+            Snackbar snackbar = Snackbar
+                    .make(getView(), message, Snackbar.LENGTH_LONG)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mTopStoryPresenter.onStart();
+                        }
+                    });
 
-        snackbar.show();
+            snackbar.show();
+            showRefreshing(false);
+        }
     }
 
     @Override
