@@ -3,4 +3,6 @@
     <string name="author_text">by %s</string>
     <string name="points_text">%d points</string>
     <string name="open_link_text">OPEN LINK</string>
+    <string name="comment_label">Comments:</string>
+    <string name="no_comments_text">No Comments</string>
 </resources>

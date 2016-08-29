@@ -1,6 +1,7 @@
 package com.ycombinator.hackernews;
 
 import com.ycombinator.hackernews.topstory.TopStory;
+import com.ycombinator.hackernews.topstorydetail.Comment;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface HackerNewsApi {
 
     @GET("item/{id}.json")
     Call<TopStory> getTopStory(@Path("id") String id);
+
+    @GET("item/{id}.json")
+    Call<Comment> getComments(@Path("id") String id);
 }

@@ -3,6 +3,7 @@ package com.ycombinator.hackernews.topstory;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -10,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ycombinator.hackernews.MainActivity;
 import com.ycombinator.hackernews.R;
+import com.ycombinator.hackernews.topstorydetail.TopStoryDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,7 @@ public class TopStoryListAdapter extends RecyclerView.Adapter<TopStoryListAdapte
 
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
-        TopStory topStory = mList.get(position);
+        final TopStory topStory = mList.get(position);
         holder.mNewsTitle.setText(topStory.getTitle());
         holder.mNewsScore.setText(mContext.getResources().getString(R.string.points_text,topStory.getScore()));
         holder.mNewsAuthor.setText(mContext.getResources().getString(R.string.author_text, topStory.getAuthor()));
@@ -51,6 +54,14 @@ public class TopStoryListAdapter extends RecyclerView.Adapter<TopStoryListAdapte
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
                 mContext.startActivity(intent);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(TopStoryDetailFragment.ID_KEY, topStory.getId());
+                ((MainActivity)mContext).navigateTo(MainActivity.FRAGMENT_TYPE.TOP_STORY_DETAIL, bundle);
             }
         });
     }
